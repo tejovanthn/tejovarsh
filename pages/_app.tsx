@@ -1,9 +1,33 @@
-import { AppProps } from 'next/app'
-import './globals.css'
+import { AppProps } from 'next/app';
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
 
-
-function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+export const GlobalStyle = createGlobalStyle`
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-export default App
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+`;
+
+export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+  return (
+    <React.Fragment>
+      <GlobalStyle />
+      <Component {...pageProps} />
+    </React.Fragment>
+  );
+};
+
+export default App;
