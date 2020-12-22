@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app';
+import Head from 'next/head';
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
@@ -9,6 +10,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 16px;
 }
 
 a {
@@ -24,6 +26,9 @@ a {
 export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <React.Fragment>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <GlobalStyle />
       <Component {...pageProps} />
     </React.Fragment>

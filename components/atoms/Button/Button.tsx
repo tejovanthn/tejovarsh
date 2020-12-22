@@ -6,9 +6,10 @@ interface ButtonProps {
 }
 
 const ButtonPrimitive = styled('button')<ButtonProps>`
-  width: 5rem;
-  height: 2rem;
+  width: 8rem;
+  height: 3rem;
   border: 1px solid teal;
+  border-radius: 0.5rem;
   color: ${(props) => (props.kind === 'primary' ? 'white' : 'teal')};
   background-color: ${(props) => (props.kind === 'primary' ? 'teal' : 'white')};
 `;
