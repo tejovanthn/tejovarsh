@@ -22,13 +22,17 @@ const NavBarPrimitive = styled('nav')`
   }
   li {
     display: block;
-    padding: 0.5rem;
     width: 100%;
     text-align: center;
     border-bottom: 0.25rem solid rgba(0, 0, 0, 0);
   }
   li.active {
     border-bottom: 0.25rem solid teal;
+  }
+  a {
+    min-width: 100%;
+    display: block;
+    padding: 0.5rem;
   }
   ${constants.devices.laptop} {
     ul {
