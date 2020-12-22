@@ -30,5 +30,14 @@ export default {
   devices: {
     mobile: `@media (min-width: ${size.mobile})`,
     laptop: `@media (min-width: ${size.laptop})`
+  },
+  timeline: {
+    blockSize: '1rem'
+  },
+  theme: {
+    colorA: 'teal',
+    colorB: 'lightblue',
+    white: 'white',
+    black: 'black'
   }
 };

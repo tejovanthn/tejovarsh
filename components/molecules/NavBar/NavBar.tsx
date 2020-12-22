@@ -8,13 +8,13 @@ import constants from '@/components/constants';
 const NavBarPrimitive = styled('nav')`
   width: 100%;
   h1 {
-    background-color: teal;
+    background-color: ${constants.theme.colorA};
     padding: 1rem 0;
     text-align: center;
     margin: 0;
   }
   ul {
-    background: lightblue;
+    background: ${constants.theme.colorB};
     margin: 0 auto;
     padding: 0 1rem;
     display: grid;
@@ -27,7 +27,7 @@ const NavBarPrimitive = styled('nav')`
     border-bottom: 0.25rem solid rgba(0, 0, 0, 0);
   }
   li.active {
-    border-bottom: 0.25rem solid teal;
+    border-bottom: 0.25rem solid ${constants.theme.colorA};
   }
   a {
     min-width: 100%;
