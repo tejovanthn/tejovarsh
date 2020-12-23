@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React from 'react';
 import styled from 'styled-components';
 import { Story } from 'types';
@@ -8,6 +9,14 @@ import { Loading } from '@/components/atoms/Loading/Loading';
 import constants from '@/components/constants';
 
 const TimelinePrimitive = styled('div')``;
+
+const MediaBox = styled('div')`
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Line = styled('div')`
   width: 100%;
@@ -23,6 +32,7 @@ const Block = styled('div')<{ left: number; active: boolean }>`
   top: calc(-${constants.timeline.blockSize} / 4);
   background-color: ${(props) => (props.active ? constants.theme.colorA : constants.theme.white)};
   border: 1px solid ${constants.theme.black};
+  cursor: pointer;
 `;
 
 interface TimelineProps {
@@ -40,15 +50,40 @@ const getBlockPositions = (story: Story[], width: number) => {
 export const Timeline: React.FC<TimelineProps> = ({ story }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const { width, loading } = useWidth(ref);
+  const [index, setIndex] = React.useState(0);
+
   const blocks = getBlockPositions(story, width);
+
   return (
     <TimelinePrimitive ref={ref}>
-      {loading ? <Loading /> : null}
-      <Line>
-        {blocks.map((block, idx) => (
-          <Block key={block} left={block} active={idx === 1} />
-        ))}
-      </Line>
+      {loading ? (
+        <Loading />
+      ) : (
+        <React.Fragment>
+          <MediaBox>
+            {story[index].media && (
+              <figure>
+                <img src={story[index].media.image} alt={story[index].media.caption} />
+                <figcaption>{story[index].media.caption}</figcaption>
+              </figure>
+            )}
+            <h2>
+              {dayjs(story[index].date).format('YYYY-MM-DD')} - {story[index].title}
+            </h2>
+            <p>{story[index].description}</p>
+          </MediaBox>
+          <Line>
+            {blocks.map((block, idx) => (
+              <Block
+                key={block}
+                left={block}
+                active={idx === index}
+                onClick={() => setIndex(idx)}
+              />
+            ))}
+          </Line>
+        </React.Fragment>
+      )}
     </TimelinePrimitive>
   );
 };
