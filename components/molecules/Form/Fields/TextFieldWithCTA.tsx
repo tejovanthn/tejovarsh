@@ -19,6 +19,7 @@ const TextFieldPrimitive = styled('div')`
   border: 1px solid ${constants.theme.colorA};
   border-radius: 0.5rem;
   padding: 0.5rem;
+  background: ${constants.theme.white};
 
   label {
     display: none;

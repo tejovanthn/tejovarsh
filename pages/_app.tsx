@@ -11,6 +11,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 16px;
+
+  background-color: #d9f099;
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png");
 }
 
 a {
