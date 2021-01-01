@@ -25,6 +25,12 @@ const ImagePrimitive = styled('div')`
   img.active {
     opacity: 1;
   }
+  ${constants.devices.laptop} {
+    img {
+      width: 66%;
+      object-fit: cover;
+    }
+  }
 `;
 
 export const Image: React.FC = () => {
