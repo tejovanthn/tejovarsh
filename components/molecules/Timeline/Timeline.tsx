@@ -6,7 +6,7 @@ import { mapRange } from 'utils/mapRange';
 import { useWidth } from 'utils/useWidth';
 
 import { Loading } from '@/components/atoms/Loading/Loading';
-import constants from '@/components/constants';
+import constants from '@/config/constants';
 
 const TimelinePrimitive = styled('div')``;
 

@@ -3,6 +3,8 @@ import Head from 'next/head';
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
+import { UserProvider } from '@/config/auth';
+
 export const GlobalStyle = createGlobalStyle`
 html,
 body {
@@ -29,13 +31,23 @@ a {
 export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <React.Fragment>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <UserProvider>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </Head>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </UserProvider>
     </React.Fragment>
   );
+};
+
+App.getInitialProps = async ({ ctx }) => {
+  if (ctx.res && ctx.req.url !== '/') {
+    ctx.res.writeHead(302, { Location: '/' });
+    ctx.res.end();
+  }
+  return {};
 };
 
 export default App;

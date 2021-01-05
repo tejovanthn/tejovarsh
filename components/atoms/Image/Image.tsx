@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useInterval } from 'utils/useInterval';
 
-import constants from '@/components/constants';
+import constants from '@/config/constants';
 
 const ImagePrimitive = styled('div')`
   width: 100%;

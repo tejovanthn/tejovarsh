@@ -53,5 +53,6 @@ export default {
     colorB: 'lightblue',
     white: 'white',
     black: 'black'
-  }
+  },
+  validPassCodes: ['AakarshitaRocks', 'Varsha<3Tejo']
 };

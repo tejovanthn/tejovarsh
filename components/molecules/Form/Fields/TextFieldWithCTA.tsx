@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import constants from '@/components/constants';
+import constants from '@/config/constants';
 
 import { FieldInternalProps } from '../Form';
 

@@ -1,9 +1,11 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
 import { Image } from '@/components/atoms/Image/Image';
-import constants from '@/components/constants';
 import { Form } from '@/components/molecules/Form/Form';
+import { loginWithGoogle, useAuth } from '@/config/auth';
+import constants from '@/config/constants';
 
 const HomeLayout = styled('main')`
   display: block;
@@ -38,7 +40,23 @@ const HomeLayout = styled('main')`
   }
 `;
 
+interface IndexFormFields extends Record<string, unknown> {
+  passcode: string;
+}
+
+const handleSubmit = ({ passcode }: IndexFormFields) => {
+  if (constants.validPassCodes.includes(passcode)) {
+    loginWithGoogle();
+  }
+};
+
 export const Home = (): JSX.Element => {
+  const router = useRouter();
+  const { user } = useAuth();
+  if (user) {
+    console.log(user);
+    router.push(constants.nav[0].path);
+  }
   return (
     <HomeLayout>
       <section className="image">
@@ -55,7 +73,7 @@ export const Home = (): JSX.Element => {
               cta: constants.home.enter
             }
           ]}
-          onSubmit={(data) => console.log(data)}
+          onSubmit={handleSubmit}
           type="inline"
         />
       </section>

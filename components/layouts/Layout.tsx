@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import constants from '@/components/constants';
 import { NavBar } from '@/components/molecules/NavBar/NavBar';
+import constants from '@/config/constants';
 
 const LayoutPrimitive = styled('div')`
   display: flex;
