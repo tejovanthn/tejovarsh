@@ -28,7 +28,7 @@ const ImagePrimitive = styled('div')`
   ${constants.devices.laptop} {
     img {
       width: 66%;
-      object-fit: cover;
+      object-fit: contain;
     }
   }
 `;
