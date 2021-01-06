@@ -72,5 +72,15 @@ export default {
       event: 'Muhurta',
       time: '2020-01-18 05:00 Z'
     }
+  ],
+  videos: [
+    {
+      link: '',
+      time: '2020-01-17 12:00 Z'
+    },
+    {
+      link: '',
+      time: '2020-01-18 12:00 Z'
+    }
   ]
 };
