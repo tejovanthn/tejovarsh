@@ -24,22 +24,22 @@ export default {
     ]
   },
   nav: [
+    // {
+    //   title: 'Story',
+    //   path: '/story'
+    // },
     {
-      title: 'Story',
-      path: '/story'
+      title: 'Schedule',
+      path: '/schedule'
     },
     {
       title: 'Watch',
       path: '/watch'
-    },
-    {
-      title: 'Messages',
-      path: '/messages'
-    },
-    {
-      title: 'Schedule',
-      path: '/schedule'
     }
+    // {
+    //   title: 'Messages',
+    //   path: '/messages'
+    // }
   ],
   devices: {
     mobile: `@media (min-width: ${size.mobile})`,
@@ -54,5 +54,23 @@ export default {
     white: 'white',
     black: 'black'
   },
-  validPassCodes: ['AakarshitaRocks', 'Varsha<3Tejo']
+  validPassCodes: ['AakarshitaRocks', 'Varsha<3Tejo'],
+  events: [
+    {
+      event: 'Welcome',
+      time: '2020-01-17 12:00 Z'
+    },
+    {
+      event: 'Engagement',
+      time: '2020-01-17 12:30 Z'
+    },
+    {
+      event: 'Varapuje',
+      time: '2020-01-17 13:30 Z'
+    },
+    {
+      event: 'Muhurta',
+      time: '2020-01-18 05:00 Z'
+    }
+  ]
 };

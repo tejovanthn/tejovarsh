@@ -1,6 +1,5 @@
 import firebase from 'firebase/app';
 import cookie from 'js-cookie';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import { auth } from './firebase';
@@ -18,7 +17,6 @@ export const UserContext = React.createContext<UserContextProps>({ user: null })
 
 export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = React.useState(null);
-  const { pathname, events } = useRouter();
 
   React.useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
