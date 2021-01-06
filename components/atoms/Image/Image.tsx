@@ -1,3 +1,4 @@
+import NextImage from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { useInterval } from 'utils/useInterval';
@@ -29,6 +30,7 @@ const ImagePrimitive = styled('div')`
     img {
       width: 66%;
       object-fit: contain;
+      object-position: center center;
     }
   }
 `;
@@ -43,11 +45,12 @@ export const Image: React.FC = () => {
   return (
     <ImagePrimitive>
       {constants.home.pictures.map((image, idx) => (
-        <img
+        <NextImage
           key={image}
           src={`${constants.imageBaseURL}${image}`}
           className={idx === imageIdx ? 'active' : 'inactive'}
           alt="tejo<3varsh"
+          unsized
         />
       ))}
     </ImagePrimitive>

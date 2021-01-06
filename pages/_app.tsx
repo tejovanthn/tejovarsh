@@ -43,7 +43,8 @@ export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 };
 
 App.getInitialProps = async ({ ctx }) => {
-  if (ctx.res && ctx.req.url !== '/') {
+  console.log(ctx.req?.url);
+  if (ctx.res && ctx.req?.url !== '/') {
     ctx.res.writeHead(302, { Location: '/' });
     ctx.res.end();
   }
