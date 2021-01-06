@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -11,6 +12,8 @@ interface UserContextProps {
   user: User | null;
 }
 
+const tokenName = 'firebaseToken';
+
 export const UserContext = React.createContext<UserContextProps>({ user: null });
 
 export const UserProvider: React.FC = ({ children }) => {
@@ -19,7 +22,13 @@ export const UserProvider: React.FC = ({ children }) => {
 
   React.useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
-      setUser(await generateUserDocument(authUser));
+      if (authUser) {
+        const token = await authUser.getIdToken();
+        cookie.set(tokenName, token, { expires: 14 });
+        setUser(await generateUserDocument(authUser));
+      } else {
+        cookie.remove(tokenName);
+      }
     });
     return () => unsubscribe();
   }, []);

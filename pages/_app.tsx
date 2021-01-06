@@ -1,9 +1,11 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import cookies from 'next-cookies';
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
-import { UserProvider } from '@/config/auth';
+import { useAuth, UserProvider } from '@/config/auth';
 
 export const GlobalStyle = createGlobalStyle`
 html,
@@ -29,6 +31,13 @@ a {
 `;
 
 export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+  const router = useRouter();
+
+  const user = useAuth();
+  if (!user) {
+    router.push('/');
+  }
+
   return (
     <React.Fragment>
       <UserProvider>
@@ -43,8 +52,8 @@ export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 };
 
 App.getInitialProps = async ({ ctx }) => {
-  console.log(ctx.req?.url);
-  if (ctx.res && ctx.req?.url !== '/') {
+  const { firebaseToken } = cookies(ctx);
+  if (!firebaseToken && ctx.res && ctx.req?.url !== '/') {
     ctx.res.writeHead(302, { Location: '/' });
     ctx.res.end();
   }
