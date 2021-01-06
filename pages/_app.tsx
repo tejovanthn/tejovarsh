@@ -6,6 +6,7 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 import { useAuth, UserProvider } from '@/config/auth';
+import constants from '@/config/constants';
 
 export const GlobalStyle = createGlobalStyle`
 html,
@@ -53,7 +54,7 @@ export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 
 App.getInitialProps = async ({ ctx }) => {
   const { firebaseToken } = cookies(ctx);
-  if (!firebaseToken && ctx.res && ctx.req?.url !== '/') {
+  if (!firebaseToken && ctx.res && constants.nav.map((path) => path.path).includes(ctx.req?.url)) {
     ctx.res.writeHead(302, { Location: '/' });
     ctx.res.end();
   }
