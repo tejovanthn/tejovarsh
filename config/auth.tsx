@@ -33,18 +33,13 @@ export const UserProvider: React.FC = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  console.log(user);
   React.useEffect(() => {
-    // Check that a new route is OK
     const handleRouteChange = (url) => {
       if (url !== '/' && !user) {
         window.location.href = '/';
       }
     };
-    // Check that initial route is OK
-    if (pathname !== '/' && user === null) {
-      window.location.href = '/';
-    }
-    // Monitor routes
     events.on('routeChangeStart', handleRouteChange);
     return () => {
       events.off('routeChangeStart', handleRouteChange);

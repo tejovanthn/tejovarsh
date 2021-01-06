@@ -54,7 +54,6 @@ export const Home = (): JSX.Element => {
   const router = useRouter();
   const { user } = useAuth();
   if (user) {
-    console.log(user);
     router.push(constants.nav[0].path);
   }
   return (
