@@ -34,10 +34,10 @@ export const generateUserDocument = async (
 const getUserDocument = async (uid: string): Promise<User> => {
   if (!uid) return null;
   try {
-    const userDocument = await db.doc(`users/${uid}`).get();
+    const userDocument = (await db.doc(`users/${uid}`).get()).data() as User;
     return {
       uid,
-      ...userDocument.data()
+      ...userDocument
     };
   } catch (error) {
     console.error('Error fetching user', error);
