@@ -33,19 +33,6 @@ export const UserProvider: React.FC = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  console.log(user);
-  React.useEffect(() => {
-    const handleRouteChange = (url) => {
-      if (url !== '/' && !user) {
-        window.location.href = '/';
-      }
-    };
-    events.on('routeChangeStart', handleRouteChange);
-    return () => {
-      events.off('routeChangeStart', handleRouteChange);
-    };
-  }, [user]);
-
   return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
 };
 
