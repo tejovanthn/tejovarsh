@@ -50,6 +50,8 @@ export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
             />
             <link rel="shortcut icon" href="/favicon.ico" />
             <link rel="manifest" href="/manifest.json" />
+            <title>TejoVarsh</title>
+            <meta name="Description" content="Tejovanth Weds Varsha" />
           </Head>
           <GlobalStyle />
           <Component {...pageProps} />
