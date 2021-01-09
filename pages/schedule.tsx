@@ -48,6 +48,16 @@ export const Schedule = (): JSX.Element => {
   return (
     <Layout>
       <h1>Schedule</h1>
+      <p>Welcome everyone!</p>
+      <p>The Shenoy Family and Nagaraja Babu family welcome you to this wonderful occasion.</p>
+      <p>
+        First of all, thank you for gracing us with your presence. We are glad that you could be a
+        part of this ceremony! At the same time, we are also grateful for all the well wishers who
+        are attending the ceremonies remotely. We miss you dearly! Please make yourselves a part of
+        the celebrations, and bless us from the comfort of your homes.
+      </p>
+      <p>Let’s begin the celebrations!</p>
+
       <ScheduleLayout>
         <DayEvents title="Day 1 - 17th Jan" events={getDayEvents('2020-01-17')} />
         <DayEvents title="Day 2 - 18th Jan" events={getDayEvents('2020-01-18')} />

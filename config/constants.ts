@@ -69,8 +69,16 @@ export default {
       time: '2020-01-17 13:30 Z'
     },
     {
+      event: 'Gowri Puje',
+      time: '2020-01-18 03:00 Z'
+    },
+    {
       event: 'Muhurta',
-      time: '2020-01-18 05:00 Z'
+      time: '2020-01-18 05:15 Z'
+    },
+    {
+      event: 'Nagavalli',
+      time: '2020-01-18 09:00 Z'
     }
   ],
   videos: [
