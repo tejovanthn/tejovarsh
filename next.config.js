@@ -1,6 +1,6 @@
 module.exports = {
   images: {
     // loader: 'cloudinary',
-    domains: ['res.cloudinary.com']
+    domains: ['lh3.googleusercontent.com', 'res.cloudinary.com']
   }
 };

@@ -1,12 +1,13 @@
 import dayjs from 'dayjs';
-import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import RelativeTime from 'dayjs/plugin/relativeTime';
+import NextImage from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 
 import constants from '@/config/constants';
 import { Message as MessageProps } from '@/config/messages';
 
-dayjs.extend(LocalizedFormat);
+dayjs.extend(RelativeTime);
 
 const Card = styled('div')`
   box-shadow: 0.25rem 0.25rem 0.5rem 0rem rgba(0, 0, 0, 0.25);
@@ -24,10 +25,11 @@ const MessagePrimitive = styled(Card)`
     'icon time'
     'message message';
 
-  img {
+  div {
     grid-area: icon;
-    width: 3rem;
-    border-radius: 4rem;
+  }
+  img {
+    border-radius: 50%;
   }
   h3 {
     grid-area: name;
@@ -45,9 +47,9 @@ const MessagePrimitive = styled(Card)`
 export const Message: React.FC<MessageProps> = ({ user, createdAt, text }) => {
   return (
     <MessagePrimitive>
-      <img src={user.photoURL} alt={user.displayName} />
+      <NextImage src={user.photoURL} alt={user.displayName} width={50} height={50} />
       <h3>{user.displayName}</h3>
-      <small>{dayjs(createdAt.toMillis()).format('LT')}</small>
+      <small>{dayjs(createdAt.toMillis()).fromNow()}</small>
       <p>{text}</p>
     </MessagePrimitive>
   );
