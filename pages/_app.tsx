@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import cookies from 'next-cookies';
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
@@ -58,15 +57,6 @@ export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
       </UserProvider>
     </React.Fragment>
   );
-};
-
-App.getInitialProps = async ({ ctx }) => {
-  const { firebaseToken } = cookies(ctx);
-  if (!firebaseToken && ctx.res && constants.nav.map((path) => path.path).includes(ctx.req?.url)) {
-    ctx.res.writeHead(302, { Location: '/' });
-    ctx.res.end();
-  }
-  return {};
 };
 
 export default App;

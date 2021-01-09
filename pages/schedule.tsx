@@ -3,6 +3,7 @@ import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import styled from 'styled-components';
 
 import Layout from '@/components/layouts/Layout';
+import { authSSR } from '@/config/auth';
 import constants from '@/config/constants';
 
 dayjs.extend(LocalizedFormat);
@@ -65,5 +66,7 @@ export const Schedule = (): JSX.Element => {
     </Layout>
   );
 };
+
+export const getServerSideProps = authSSR;
 
 export default Schedule;

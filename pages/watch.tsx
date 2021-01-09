@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import styled from 'styled-components';
 
 import Layout from '@/components/layouts/Layout';
+import { authSSR } from '@/config/auth';
 import constants from '@/config/constants';
 
 const WatchLayout = styled('div')`
@@ -37,5 +38,7 @@ export const Watch = (): JSX.Element => {
     </Layout>
   );
 };
+
+export const getServerSideProps = authSSR;
 
 export default Watch;

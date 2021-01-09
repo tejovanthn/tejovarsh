@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Layout from '@/components/layouts/Layout';
 import { Form } from '@/components/molecules/Form/Form';
 import { CreateMessage, Message } from '@/components/molecules/Message/Message';
-import { useAuth } from '@/config/auth';
+import { authSSR, useAuth } from '@/config/auth';
 import constants from '@/config/constants';
 import { createMessage, useMessages } from '@/config/messages';
 
@@ -77,5 +77,7 @@ export const Messages = (): JSX.Element => {
     </Layout>
   );
 };
+
+export const getServerSideProps = authSSR;
 
 export default Messages;

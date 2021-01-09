@@ -1,7 +1,10 @@
 import firebase from 'firebase/app';
 import cookie from 'js-cookie';
+import { GetServerSideProps } from 'next';
+import cookies from 'next-cookies';
 import React from 'react';
 
+import constants from './constants';
 import { auth } from './firebase';
 import { generateUserDocument, User } from './users';
 
@@ -42,4 +45,16 @@ export const loginWithGoogle = async (): Promise<void> => {
 
 export const logout = async (): Promise<void> => {
   await auth.signOut();
+};
+
+export const authSSR: GetServerSideProps = async (ctx) => {
+  const { firebaseToken } = cookies(ctx);
+  if (!firebaseToken && ctx.res && constants.nav.map((path) => path.path).includes(ctx.req?.url)) {
+    ctx.res.writeHead(302, { Location: '/' });
+    ctx.res.end();
+    return {
+      props: {}
+    };
+  }
+  return { props: {} };
 };
