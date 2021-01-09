@@ -69,7 +69,7 @@ export const TextFieldWithCTA: React.FC<TextFieldProps> = ({
         ref={register}
         placeholder={placeholder || name}
       />
-      {error && <span>{error}</span>}
+      {error && <span>{error.message}</span>}
       <input type="submit" value={cta} />
     </TextFieldPrimitive>
   );

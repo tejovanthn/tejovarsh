@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import React from 'react';
 
 import { db } from './firebase';
 import { User } from './users';
@@ -43,3 +44,33 @@ export const getAllMessages = async (): Promise<Message[]> => {
     console.error('Error fetching messages', error);
   }
 };
+
+interface MessageContextProps {
+  messages: Message[];
+}
+
+export const MessageContext = React.createContext<MessageContextProps>({ messages: [] });
+
+export const MessageProvider: React.FC = ({ children }) => {
+  const [messages, setMessages] = React.useState<Message[]>([]);
+
+  React.useEffect(() => {
+    const unsubscribe = db
+      .collection('messages')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot((snapshot) => {
+        const allmessages = [];
+        snapshot.forEach((doc) => {
+          if (!doc.metadata.hasPendingWrites) {
+            allmessages.push({ ...doc.data(), id: doc.id });
+          }
+        });
+        setMessages(allmessages);
+      });
+    return () => unsubscribe();
+  }, []);
+
+  return <MessageContext.Provider value={{ messages }}>{children}</MessageContext.Provider>;
+};
+
+export const useMessages = (): MessageContextProps => React.useContext(MessageContext);

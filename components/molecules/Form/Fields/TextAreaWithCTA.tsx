@@ -80,7 +80,7 @@ export const TextAreaWithCTA: React.FC<TextAreaProps> = ({
       <label htmlFor={id}>{name}</label>
       <textarea name={id} id={id} value={value} ref={register} placeholder={placeholder || name} />
       <input type="submit" value={cta} />
-      {error && <span>{error}</span>}
+      {error && <span>{error.message}</span>}
     </TextAreaPrimitive>
   );
 };
