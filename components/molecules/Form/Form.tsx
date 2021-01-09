@@ -1,7 +1,8 @@
-import React, { LegacyRef } from 'react';
-import { FieldError, useForm } from 'react-hook-form';
+import React from 'react';
+import { FieldError, useForm, UseFormMethods } from 'react-hook-form';
 import styled from 'styled-components';
 
+import { TextAreaWithCTA } from './Fields/TextAreaWithCTA';
 import { TextField } from './Fields/TextField';
 import { TextFieldWithCTA } from './Fields/TextFieldWithCTA';
 
@@ -9,13 +10,14 @@ export interface FieldProps {
   id: string;
   name: string;
   value?: string;
-  type: 'text' | 'number' | 'textWithCTA';
+  placeholder?: string;
+  type: 'text' | 'number' | 'textWithCTA' | 'textareaWithCTA';
   cta?: string;
 }
 
 export interface FieldInternalProps extends FieldProps {
   error?: FieldError;
-  register: LegacyRef<HTMLInputElement>;
+  register: UseFormMethods['register'];
 }
 
 export interface FormProps<T = Record<string, unknown>> {
@@ -32,7 +34,7 @@ const FormPrimitive = styled('form')<FormInternalProps>`
 
 const renderFields = (
   field: FieldProps,
-  register: LegacyRef<HTMLInputElement>,
+  register: UseFormMethods['register'],
   error: FieldError
 ) => {
   const props = {
@@ -46,6 +48,8 @@ const renderFields = (
       return <TextField {...props} />;
     case 'textWithCTA':
       return <TextFieldWithCTA {...props} />;
+    case 'textareaWithCTA':
+      return <TextAreaWithCTA {...props} />;
   }
 };
 

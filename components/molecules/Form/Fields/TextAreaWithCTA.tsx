@@ -5,17 +5,17 @@ import constants from '@/config/constants';
 
 import { FieldInternalProps } from '../Form';
 
-interface TextFieldProps extends FieldInternalProps {
+interface TextAreaProps extends FieldInternalProps {
   cta?: string;
 }
 
-const TextFieldPrimitive = styled('div')`
+const TextAreaPrimitive = styled('div')`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
   width: 12rem;
-  height: 3rem;
+  height: auto;
   border: 1px solid ${constants.theme.colorA};
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -24,10 +24,14 @@ const TextFieldPrimitive = styled('div')`
   label {
     display: none;
   }
-  input[type='text'] {
+  textarea {
     height: 100%;
     width: 100%;
     flex: 10;
+    height: 10rem;
+    resize: none;
+    font-family: inherit;
+    font-size: inherit;
   }
   input[type='submit'] {
     background: none;
@@ -38,18 +42,21 @@ const TextFieldPrimitive = styled('div')`
     font-size: 0.75rem;
     font-family: 'Dancing Script', sanserif;
   }
+  textarea,
+  textarea:focus,
   input,
   input:focus {
     border: none;
     border-radius: inherit;
     outline: none;
   }
-  input::placeholder {
-    font-family: 'Dancing Script', sanserif;
+  textarea::placeholder {
+    font-family: inherit;
+    font-size: 1rem;
   }
 `;
 
-export const TextFieldWithCTA: React.FC<TextFieldProps> = ({
+export const TextAreaWithCTA: React.FC<TextAreaProps> = ({
   id,
   placeholder,
   name,
@@ -59,18 +66,11 @@ export const TextFieldWithCTA: React.FC<TextFieldProps> = ({
   cta = 'submit'
 }) => {
   return (
-    <TextFieldPrimitive>
+    <TextAreaPrimitive>
       <label htmlFor={id}>{name}</label>
-      <input
-        type="text"
-        name={id}
-        id={id}
-        value={value}
-        ref={register}
-        placeholder={placeholder || name}
-      />
+      <textarea name={id} id={id} value={value} ref={register} placeholder={placeholder || name} />
       {error && <span>{error}</span>}
       <input type="submit" value={cta} />
-    </TextFieldPrimitive>
+    </TextAreaPrimitive>
   );
 };

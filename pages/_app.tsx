@@ -31,6 +31,9 @@ a {
 * {
   box-sizing: border-box;
 }
+${constants.devices.laptop}{
+  html, body {font-size: 18px;}
+}
 `;
 
 export const App = ({ Component, pageProps }: AppProps): JSX.Element => {

@@ -12,7 +12,7 @@ const NavBarPrimitive = styled('nav')`
     padding: 1rem 0;
     text-align: center;
     margin: 0;
-    font-size: 3rem;
+    font-size: 2rem;
   }
   ul {
     background: ${constants.theme.colorB};

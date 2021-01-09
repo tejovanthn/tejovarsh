@@ -45,7 +45,9 @@ export const Messages = (): JSX.Element => {
               {
                 id: 'text',
                 name: 'Message',
-                type: 'textWithCTA',
+                placeholder:
+                  'Enter your messages/wishes here! Thank you for being a part of the ceremonies remotely.',
+                type: 'textareaWithCTA',
                 cta: constants.messages.enter
               }
             ]}
