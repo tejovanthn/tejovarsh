@@ -9,14 +9,16 @@ interface TextAreaProps extends FieldInternalProps {
   cta?: string;
 }
 
-const TextAreaPrimitive = styled('div')`
+const TextAreaPrimitive = styled('div')<{ error: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
 
   width: 12rem;
   height: auto;
-  border: 1px solid ${constants.theme.colorA};
+  border: ${(props) =>
+    props.error ? `1px solid ${constants.theme.red}` : `1px solid ${constants.theme.colorA}`};
   border-radius: 0.5rem;
   padding: 0.5rem;
   background: ${constants.theme.white};
@@ -54,6 +56,14 @@ const TextAreaPrimitive = styled('div')`
     font-family: inherit;
     font-size: 1rem;
   }
+  span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: ${constants.theme.red};
+  }
 `;
 
 export const TextAreaWithCTA: React.FC<TextAreaProps> = ({
@@ -66,11 +76,11 @@ export const TextAreaWithCTA: React.FC<TextAreaProps> = ({
   cta = 'submit'
 }) => {
   return (
-    <TextAreaPrimitive>
+    <TextAreaPrimitive error={!!error}>
       <label htmlFor={id}>{name}</label>
       <textarea name={id} id={id} value={value} ref={register} placeholder={placeholder || name} />
-      {error && <span>{error}</span>}
       <input type="submit" value={cta} />
+      {error && <span>{error}</span>}
     </TextAreaPrimitive>
   );
 };

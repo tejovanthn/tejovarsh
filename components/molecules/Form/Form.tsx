@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldError, useForm, UseFormMethods } from 'react-hook-form';
+import { FieldError, useForm, UseFormMethods, UseFormOptions } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { TextAreaWithCTA } from './Fields/TextAreaWithCTA';
@@ -24,6 +24,7 @@ export interface FormProps<T = Record<string, unknown>> {
   fields: FieldProps[];
   onSubmit: (data: T) => void;
   type?: 'inline';
+  resolver?: UseFormOptions['resolver'];
 }
 export type FormInternalProps = Pick<FormProps, 'type'>;
 
@@ -53,8 +54,8 @@ const renderFields = (
   }
 };
 
-export const Form: React.FC<FormProps> = ({ fields, onSubmit, type }) => {
-  const { register, handleSubmit, errors } = useForm();
+export const Form: React.FC<FormProps> = ({ fields, onSubmit, type, resolver }) => {
+  const { register, handleSubmit, errors } = useForm({ resolver });
 
   return (
     <FormPrimitive onSubmit={handleSubmit(onSubmit)} type={type}>

@@ -55,7 +55,8 @@ export default {
     colorA: '#7b4a61',
     colorB: '#f178ca',
     white: 'white',
-    black: 'black'
+    black: 'black',
+    red: 'red'
   },
   validPassCodes: ['AakarshitaRocks', 'Varsha<3Tejo'],
   events: [

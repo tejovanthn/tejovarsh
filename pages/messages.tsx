@@ -1,3 +1,4 @@
+import Filter from 'bad-words';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -23,6 +24,22 @@ const MessageLayout = styled('div')`
 interface MessagesFormFields extends Record<string, unknown> {
   text: string;
 }
+
+const messagesResolver = ({ text }) => {
+  const filter = new Filter();
+  if (filter.isProfane(text)) {
+    return {
+      values: {},
+      errors: {
+        text: 'Please no profanity'
+      }
+    };
+  }
+  return {
+    values: { text },
+    errors: {}
+  };
+};
 
 export const Messages = (): JSX.Element => {
   const { user } = useAuth();
@@ -53,6 +70,7 @@ export const Messages = (): JSX.Element => {
             ]}
             onSubmit={handleSubmit}
             type="inline"
+            resolver={messagesResolver}
           />
         </CreateMessage>
         {messages.map((message) => (
