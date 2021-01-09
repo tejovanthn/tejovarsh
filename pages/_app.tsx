@@ -49,6 +49,8 @@ export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
               href={`https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lato&display=swap`}
               rel="stylesheet"
             />
+            <link rel="shortcut icon" href="/favicon.ico" />
+            <link rel="manifest" href="/manifest.json" />
           </Head>
           <GlobalStyle />
           <Component {...pageProps} />
