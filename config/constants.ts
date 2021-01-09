@@ -23,6 +23,9 @@ export default {
       'photo6301000749227813763_cskvfj'
     ]
   },
+  messages: {
+    enter: 'SEND'
+  },
   nav: [
     // {
     //   title: 'Story',
@@ -35,11 +38,11 @@ export default {
     {
       title: 'Watch',
       path: '/watch'
+    },
+    {
+      title: 'Messages',
+      path: '/messages'
     }
-    // {
-    //   title: 'Messages',
-    //   path: '/messages'
-    // }
   ],
   devices: {
     mobile: `@media (min-width: ${size.mobile})`,
