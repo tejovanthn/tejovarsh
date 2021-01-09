@@ -1,7 +1,7 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import React from 'react';
 
-import { db } from './firebase';
+import { getDB } from './firebase';
 import { User } from './users';
 
 export type Timestamp = firebase.firestore.Timestamp;
@@ -18,7 +18,7 @@ export const createMessage = async (
   text: Message['text']
 ): Promise<void> => {
   if (!user || !text) return;
-  const messageRef = db.collection('messages').doc();
+  const messageRef = (await getDB()).collection('messages').doc();
   try {
     return messageRef.set({
       user: {
@@ -37,7 +37,7 @@ export const createMessage = async (
 export const getAllMessages = async (): Promise<Message[]> => {
   try {
     const messages: Message[] = [];
-    const snapshot = await db.collection('messages').get();
+    const snapshot = await (await getDB()).collection('messages').get();
     snapshot.forEach((doc) => messages.push({ id: doc.id, ...(doc.data() as Message) }));
     return messages.sort((a, b) => b.createdAt.toMillis() - a.createdAt.toMillis());
   } catch (error) {
@@ -55,18 +55,21 @@ export const MessageProvider: React.FC = ({ children }) => {
   const [messages, setMessages] = React.useState<Message[]>([]);
 
   React.useEffect(() => {
-    const unsubscribe = db
-      .collection('messages')
-      .orderBy('createdAt', 'desc')
-      .onSnapshot((snapshot) => {
-        const allmessages = [];
-        snapshot.forEach((doc) => {
-          if (!doc.metadata.hasPendingWrites) {
-            allmessages.push({ ...doc.data(), id: doc.id });
-          }
+    let unsubscribe: firebase.Unsubscribe;
+    getDB().then((database) => {
+      unsubscribe = database
+        .collection('messages')
+        .orderBy('createdAt', 'desc')
+        .onSnapshot((snapshot) => {
+          const allmessages = [];
+          snapshot.forEach((doc) => {
+            if (!doc.metadata.hasPendingWrites) {
+              allmessages.push({ ...doc.data(), id: doc.id });
+            }
+          });
+          setMessages(allmessages);
         });
-        setMessages(allmessages);
-      });
+    });
     return () => unsubscribe();
   }, []);
 

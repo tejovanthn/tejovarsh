@@ -1,6 +1,6 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
-import { db } from './firebase';
+import { getDB } from './firebase';
 
 export interface User {
   uid: string;
@@ -14,7 +14,7 @@ export const generateUserDocument = async (
   additionalData = {}
 ): Promise<User> => {
   if (!user) return;
-  const userRef = db.doc(`users/${user.uid}`);
+  const userRef = (await getDB()).doc(`users/${user.uid}`);
   const snapshot = await userRef.get();
   if (!snapshot.exists) {
     const { email, displayName, photoURL } = user;
@@ -34,7 +34,7 @@ export const generateUserDocument = async (
 const getUserDocument = async (uid: string): Promise<User> => {
   if (!uid) return null;
   try {
-    const userDocument = (await db.doc(`users/${uid}`).get()).data() as User;
+    const userDocument = (await (await getDB()).doc(`users/${uid}`).get()).data() as User;
     return {
       uid,
       ...userDocument

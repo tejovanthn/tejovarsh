@@ -1,8 +1,5 @@
 import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
 
-// import 'firebase/analytics';
 import firebase from 'firebase/app';
 
 export const firebaseConfig = {
@@ -21,14 +18,21 @@ if (!firebase.apps.length) {
 }
 
 const app = firebase.app();
-const auth = firebase.auth();
-const db = firebase.firestore();
-const now = firebase.firestore.Timestamp.now();
-const storage = firebase.storage();
-// if (process.env.NODE_ENV === 'production') {
-//   firebase.analytics();
-// }
 
-export { auth, db, now, storage };
+const getAuth = async (): Promise<firebase.auth.Auth> => {
+  if (!firebase.auth) {
+    await import('firebase/auth');
+  }
+  return firebase.auth();
+};
+const getDB = async (): Promise<firebase.firestore.Firestore> => {
+  if (!firebase.firestore) {
+    await import('firebase/firestore');
+  }
+
+  return firebase.firestore();
+};
+
+export { getAuth, getDB };
 
 console.log(app.name ? 'Firebase Mode Activated!' : 'Firebase not working :(');

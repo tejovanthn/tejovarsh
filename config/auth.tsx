@@ -5,11 +5,10 @@ import cookies from 'next-cookies';
 import React from 'react';
 
 import constants from './constants';
-import { auth } from './firebase';
+import { getAuth } from './firebase';
 import { generateUserDocument, User } from './users';
 
 const provider = new firebase.auth.GoogleAuthProvider();
-
 interface UserContextProps {
   user: User | null;
 }
@@ -22,14 +21,17 @@ export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
-      if (authUser) {
-        const token = await authUser.getIdToken();
-        cookie.set(tokenName, token, { expires: 14 });
-        setUser(await generateUserDocument(authUser));
-      } else {
-        cookie.remove(tokenName);
-      }
+    let unsubscribe: firebase.Unsubscribe;
+    getAuth().then((auth) => {
+      unsubscribe = auth.onAuthStateChanged(async (authUser) => {
+        if (authUser) {
+          const token = await authUser.getIdToken();
+          cookie.set(tokenName, token, { expires: 14 });
+          setUser(await generateUserDocument(authUser));
+        } else {
+          cookie.remove(tokenName);
+        }
+      });
     });
     return () => unsubscribe();
   }, []);
@@ -40,11 +42,11 @@ export const UserProvider: React.FC = ({ children }) => {
 export const useAuth = (): UserContextProps => React.useContext(UserContext);
 
 export const loginWithGoogle = async (): Promise<void> => {
-  await auth.signInWithPopup(provider);
+  await (await getAuth()).signInWithPopup(provider);
 };
 
 export const logout = async (): Promise<void> => {
-  await auth.signOut();
+  await (await getAuth()).signOut();
 };
 
 export const authSSR: GetServerSideProps = async (ctx) => {
