@@ -24,6 +24,9 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const now = firebase.firestore.Timestamp.now();
 const storage = firebase.storage();
+if (process.env.NODE_ENV === 'production') {
+  firebase.analytics();
+}
 
 export { auth, db, now, storage };
 
