@@ -12,12 +12,15 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Lato", sanserif;
   font-size: 16px;
 
-  background-color: #d9f099;
-  background-image: url("https://www.transparenttextures.com/patterns/arches.png");
+  background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/texturetastic_gray.png");
+  background-color: ${constants.theme.colorA};
+  background-blend-mode: hard-light;
+}
+h1, h2, h3 {
+  font-family: "Dancing Script", sanserif;
 }
 
 a {
@@ -36,6 +39,11 @@ export const App = ({ Component, pageProps }: AppProps): JSX.Element => {
       <UserProvider>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href={`https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lato&display=swap`}
+            rel="stylesheet"
+          />
         </Head>
         <GlobalStyle />
         <Component {...pageProps} />

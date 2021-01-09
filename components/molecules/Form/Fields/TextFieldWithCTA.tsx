@@ -36,12 +36,16 @@ const TextFieldPrimitive = styled('div')`
     flex: 1;
     cursor: pointer;
     font-size: 0.75rem;
+    font-family: 'Dancing Script', sanserif;
   }
   input,
   input:focus {
     border: none;
     border-radius: inherit;
     outline: none;
+  }
+  input::placeholder {
+    font-family: 'Dancing Script', sanserif;
   }
 `;
 

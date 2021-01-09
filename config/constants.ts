@@ -49,8 +49,8 @@ export default {
     blockSize: '1rem'
   },
   theme: {
-    colorA: 'teal',
-    colorB: 'lightblue',
+    colorA: '#7b4a61',
+    colorB: '#f178ca',
     white: 'white',
     black: 'black'
   },

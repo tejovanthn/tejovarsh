@@ -12,6 +12,7 @@ const NavBarPrimitive = styled('nav')`
     padding: 1rem 0;
     text-align: center;
     margin: 0;
+    font-size: 3rem;
   }
   ul {
     background: ${constants.theme.colorB};
@@ -25,6 +26,7 @@ const NavBarPrimitive = styled('nav')`
     width: 100%;
     text-align: center;
     border-bottom: 0.25rem solid rgba(0, 0, 0, 0);
+    font-family: 'Dancing Script', sanserif;
   }
   li.active {
     border-bottom: 0.25rem solid ${constants.theme.colorA};
