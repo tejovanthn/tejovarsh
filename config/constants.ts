@@ -58,7 +58,7 @@ export default {
     black: 'black',
     red: 'red'
   },
-  validPassCodes: ['AakarshitaRocks', 'Varsha<3Tejo', 'AhanuCutest'],
+  validPassCodes: ['AakarshitaRocks', 'Varsha<3Tejo', 'Varsha<3Tejo', 'AhanuCutest'],
   events: [
     {
       event: 'Welcome',
