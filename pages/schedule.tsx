@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import React from 'react';
 import styled from 'styled-components';
 
 import Layout from '@/components/layouts/Layout';
@@ -69,4 +70,4 @@ export const Schedule = (): JSX.Element => {
 
 export const getServerSideProps = authSSR;
 
-export default Schedule;
+export default React.memo(Schedule);

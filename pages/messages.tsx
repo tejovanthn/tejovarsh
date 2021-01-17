@@ -82,4 +82,4 @@ export const Messages = (): JSX.Element => {
 
 export const getServerSideProps = authSSR;
 
-export default Messages;
+export default React.memo(Messages);

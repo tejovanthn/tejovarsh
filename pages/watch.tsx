@@ -93,4 +93,4 @@ export const Watch = (): JSX.Element => {
 
 export const getServerSideProps = authSSR;
 
-export default Watch;
+export default React.memo(Watch);

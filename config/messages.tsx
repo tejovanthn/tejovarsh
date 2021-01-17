@@ -51,25 +51,30 @@ interface MessageContextProps {
 
 export const MessageContext = React.createContext<MessageContextProps>({ messages: [] });
 
+const getMessages = (setMessages) => {
+  let unsubscribe: firebase.Unsubscribe;
+  getDB().then((database) => {
+    unsubscribe = database
+      .collection('messages')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot((snapshot) => {
+        const allmessages = [];
+        snapshot.forEach((doc) => {
+          if (!doc.metadata.hasPendingWrites) {
+            allmessages.push({ ...doc.data(), id: doc.id });
+          }
+        });
+        setMessages(allmessages);
+      });
+  });
+  return unsubscribe;
+};
+
 export const MessageProvider: React.FC = ({ children }) => {
   const [messages, setMessages] = React.useState<Message[]>([]);
 
   React.useEffect(() => {
-    let unsubscribe: firebase.Unsubscribe;
-    getDB().then((database) => {
-      unsubscribe = database
-        .collection('messages')
-        .orderBy('createdAt', 'desc')
-        .onSnapshot((snapshot) => {
-          const allmessages = [];
-          snapshot.forEach((doc) => {
-            if (!doc.metadata.hasPendingWrites) {
-              allmessages.push({ ...doc.data(), id: doc.id });
-            }
-          });
-          setMessages(allmessages);
-        });
-    });
+    const unsubscribe = getMessages(setMessages);
     return () => unsubscribe();
   }, []);
 
