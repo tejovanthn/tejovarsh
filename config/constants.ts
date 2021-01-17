@@ -87,12 +87,12 @@ export default {
   ],
   videos: [
     {
-      link: '',
-      time: '2020-01-17 12:00 Z'
+      link: 'https://gvslive.com/tejovanthvarsha/',
+      time: '2021-01-17 12:00 Z'
     },
     {
-      link: '',
-      time: '2020-01-18 12:00 Z'
+      link: 'https://gvslive.com/tejovanthvarsha/',
+      time: '2021-01-18 12:00 Z'
     }
   ]
 };

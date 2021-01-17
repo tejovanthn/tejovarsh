@@ -17,16 +17,18 @@ const MessageLayout = styled('div')`
     width: 100%;
   }
   ${constants.devices.laptop} {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: masonry;
   }
 `;
 
-interface MessagesFormFields extends Record<string, unknown> {
+export interface MessagesFormFields extends Record<string, unknown> {
   text: string;
 }
 
-const messagesResolver = ({ text }: MessagesFormFields): ResolverResult<MessagesFormFields> => {
+export const messagesResolver = ({
+  text
+}: MessagesFormFields): ResolverResult<MessagesFormFields> => {
   const filter = new Filter();
   if (filter.isProfane(text)) {
     return {

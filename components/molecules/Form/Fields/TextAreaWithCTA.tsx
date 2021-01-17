@@ -15,7 +15,7 @@ const TextAreaPrimitive = styled('div')<{ error: boolean }>`
   justify-content: space-between;
   position: relative;
 
-  width: 12rem;
+  width: 100%;
   height: auto;
   border: ${(props) =>
     props.error ? `1px solid ${constants.theme.red}` : `1px solid ${constants.theme.colorA}`};
