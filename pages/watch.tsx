@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -32,22 +31,21 @@ const WatchLayout = styled('div')`
   }
 `;
 
-const WatchBlock: React.FC = () => {
-  const videoLink = constants.videos.find((video) => dayjs().isSame(video.time, 'date'));
-  if (videoLink) {
-    return (
+const WatchBlock = () => {
+  return constants.videos.map((videoLink) => (
+    <div key={videoLink.link}>
+      <h2>{videoLink.title}</h2>
       <iframe
-        title="TejoVarsh"
         width="100%"
-        height="100%"
+        height="500px"
         src={videoLink.link}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
+        title={videoLink.title}
       />
-    );
-  }
-  return <p>Coming Soon</p>;
+    </div>
+  ));
 };
 
 export const Watch = (): JSX.Element => {

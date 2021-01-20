@@ -87,11 +87,13 @@ export default {
   ],
   videos: [
     {
-      link: 'https://gvslive.com/tejovanthvarsha/',
+      title: 'Varapuje',
+      link: 'https://www.youtube.com/embed/9wb3naTpyX8',
       time: '2021-01-17 12:00 Z'
     },
     {
-      link: 'https://gvslive.com/tejovanthvarsha/',
+      title: 'Muhurtam',
+      link: 'https://www.youtube.com/embed/SlPEHcFtR3E',
       time: '2021-01-18 12:00 Z'
     }
   ]
