@@ -5,6 +5,7 @@ import constants from '@/config/constants';
 
 interface ButtonProps {
   kind: 'primary' | 'secondary';
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const ButtonPrimitive = styled('button')<ButtonProps>`
@@ -17,6 +18,10 @@ const ButtonPrimitive = styled('button')<ButtonProps>`
     props.kind === 'primary' ? constants.theme.colorA : constants.theme.white};
 `;
 
-export const Button: React.FC<ButtonProps> = ({ children, kind = 'primary' }) => {
-  return <ButtonPrimitive kind={kind}>{children}</ButtonPrimitive>;
+export const Button: React.FC<ButtonProps> = ({ children, onClick, kind = 'primary' }) => {
+  return (
+    <ButtonPrimitive kind={kind} onClick={(e) => onClick(e)}>
+      {children}
+    </ButtonPrimitive>
+  );
 };

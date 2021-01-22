@@ -34,6 +34,17 @@ export const createMessage = async (
   }
 };
 
+export const archiveMessage = async (id: Message['id']): Promise<void> => {
+  const messageRef = (await getDB()).collection('messages').doc(id);
+  try {
+    return messageRef.update({
+      archived: true
+    });
+  } catch (error) {
+    console.log('Error archiving message', error);
+  }
+};
+
 export const getAllMessages = async (): Promise<Message[]> => {
   try {
     const messages: Message[] = [];
@@ -56,6 +67,7 @@ const getMessages = (setMessages) => {
   getDB().then((database) => {
     unsubscribe = database
       .collection('messages')
+      .where('archived', '==', false)
       .orderBy('createdAt', 'desc')
       .onSnapshot((snapshot) => {
         const allmessages = [];

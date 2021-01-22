@@ -4,8 +4,10 @@ import NextImage from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/atoms/Button/Button';
+import { useAuth } from '@/config/auth';
 import constants from '@/config/constants';
-import { Message as MessageProps } from '@/config/messages';
+import { archiveMessage, Message as MessageProps } from '@/config/messages';
 
 dayjs.extend(RelativeTime);
 
@@ -44,13 +46,19 @@ const MessagePrimitive = styled(Card)`
   }
 `;
 
-export const Message: React.FC<MessageProps> = ({ user, createdAt, text }) => {
+export const Message: React.FC<MessageProps> = ({ id, user, createdAt, text }) => {
+  const { user: authUser } = useAuth();
   return (
     <MessagePrimitive>
       <NextImage src={user.photoURL} alt={user.displayName} width={50} height={50} />
       <h3>{user.displayName}</h3>
       <small>{dayjs(createdAt.toMillis()).fromNow()}</small>
       <p>{text}</p>
+      {authUser && constants.admins.includes(authUser.email) ? (
+        <Button kind="secondary" onClick={() => archiveMessage(id)}>
+          Archive
+        </Button>
+      ) : null}
     </MessagePrimitive>
   );
 };

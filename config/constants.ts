@@ -96,5 +96,6 @@ export default {
       link: 'https://www.youtube.com/embed/SlPEHcFtR3E',
       time: '2021-01-18 12:00 Z'
     }
-  ]
+  ],
+  admins: ['tejovanth.n@gmail.com']
 };
