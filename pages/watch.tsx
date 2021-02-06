@@ -32,20 +32,24 @@ const WatchLayout = styled('div')`
 `;
 
 const WatchBlock = () => {
-  return constants.videos.map((videoLink) => (
-    <div key={videoLink.link}>
-      <h2>{videoLink.title}</h2>
-      <iframe
-        width="100%"
-        height="500px"
-        src={videoLink.link}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        title={videoLink.title}
-      />
-    </div>
-  ));
+  return (
+    <React.Fragment>
+      {constants.videos.map((videoLink) => (
+        <div key={videoLink.link}>
+          <h2>{videoLink.title}</h2>
+          <iframe
+            width="100%"
+            height="500px"
+            src={videoLink.link}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title={videoLink.title}
+          />
+        </div>
+      ))}
+    </React.Fragment>
+  );
 };
 
 export const Watch = (): JSX.Element => {
